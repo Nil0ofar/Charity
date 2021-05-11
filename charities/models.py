@@ -27,3 +27,30 @@ class Charity(models.Model):
     reg_number = models.CharField(max_length=10)
 
 
+class Task(models.Model):
+
+    id = models.AutoField(primary_key=True)
+
+    assigned_benefactor = models.OneToOneField(Benefactor, null=True, on_delete=models.SET_NULL)
+
+    charity = models.OneToOneField(Charity, on_delete=models.CASCADE)
+
+    age_limit_from = models.IntegerField(blank=True, null=True)
+
+    age_limit_to = models.IntegerField(blank=True, null=True)
+
+    date = models.DateField(blank=True, null=True)
+
+    description = models.TextField(blank=True, null=True)
+
+    genderLimitChoices = (('F', 'Female'),
+                          ('M', 'Male'))
+    gender_limit = models.CharField(max_length=1, choices=genderLimitChoices, blank=True, null=True)
+
+    stateChoices = (('P', 'Pending'),
+                    ('W', 'Waiting'),
+                    ('A', 'Assigned'),
+                    ('D', 'Done'))
+    state = models.CharField(max_length=1, choices=stateChoices, default='P')
+
+    title = models.CharField(max_length=100)
