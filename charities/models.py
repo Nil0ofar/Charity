@@ -14,3 +14,16 @@ class Benefactor(models.Model):
     experience= models.SmallIntegerField(choices=experienceChoices, default=0)
 
     free_Time_per_week= models.PositiveSmallIntegerField(default=0)
+
+
+class Charity(models.Model):
+
+    id = models.AutoField(primary_key = True)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=50)
+
+    reg_number = models.CharField(max_length=10)
+
+
