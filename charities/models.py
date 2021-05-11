@@ -13,7 +13,7 @@ class Benefactor(models.Model):
                          (2, 'expert'))
     experience= models.SmallIntegerField(choices=experienceChoices, default=0)
 
-    free_Time_per_week= models.PositiveSmallIntegerField(default=0)
+    free_time_per_week= models.PositiveSmallIntegerField(default=0)
 
 
 class Charity(models.Model):
