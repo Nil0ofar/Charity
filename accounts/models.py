@@ -15,4 +15,4 @@ class User(AbstractUser):
     address = models.TextField(blank=True, null=True)
 
     genderChoice = (('M', 'Male'), ('F', 'Female'))
-    gender = models.CharField(max_length= 1, choices=genderChoice)
+    gender = models.CharField(max_length= 1, choices=genderChoice, null=True, blank=True)
