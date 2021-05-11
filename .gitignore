@@ -1,9 +1,3 @@
-.idea/
-.venv/
-charity/settings.py
-
-------------------------------------------------
-
 *.egg-info
 *.pot
 *.py[co]
@@ -18,3 +12,19 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+
+# virtualenv
+.venv/
+venv/
+ENV/
+
+#idea
+.idea
+
+
+#SQL Lite DBs
+*.sqlite3
+*.origin
+
+
+charity/settings.py
