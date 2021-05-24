@@ -28,12 +28,11 @@ class Charity(models.Model):
 
 
 class Task(models.Model):
-
     id = models.AutoField(primary_key=True)
 
-    assigned_benefactor = models.OneToOneField(Benefactor, null=True, on_delete=models.SET_NULL)
+    assigned_benefactor = models.ForeignKey(Benefactor, null=True, on_delete=models.SET_NULL)
 
-    charity = models.OneToOneField(Charity, on_delete=models.CASCADE)
+    charity = models.ForeignKey(Charity, on_delete=models.CASCADE)
 
     age_limit_from = models.IntegerField(blank=True, null=True)
 
