@@ -27,6 +27,33 @@ class Charity(models.Model):
     reg_number = models.CharField(max_length=10)
 
 
+class TaskManager(models.Manager):
+    def related_tasks_to_charity(self, user):
+        if not hasattr(user, 'charity'):
+            return None
+        return self.filter(charity= user.charity)
+
+    def related_tasks_to_benefactor(self, user):
+        if not hasattr(user, 'benefactor'):
+            return None
+        return self.filter(assigned_benefactor=user.benefactor)
+
+    def pending_tasks(self):
+        return self.filter(state= 'P')
+
+    def all_related_tasks_to_user(self, user):
+        if hasattr(user, 'charity'):
+            return (self.pending_tasks() |
+                    self.related_tasks_to_charity(user)).distinct()
+
+        elif hasattr(user, 'benefactor'):
+            return (self.pending_tasks() |
+                    self.related_tasks_to_benefactor(user)).distinct()
+
+        else:
+            return self.pending_tasks()
+
+
 class Task(models.Model):
     id = models.AutoField(primary_key=True)
 
@@ -53,3 +80,5 @@ class Task(models.Model):
     state = models.CharField(max_length=1, choices=stateChoices, default='P')
 
     title = models.CharField(max_length=100)
+
+    objects = TaskManager()
